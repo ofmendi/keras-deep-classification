@@ -1,9 +1,7 @@
 import numpy as np
 import pandas as pd
-import keras
 from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Input
-from keras.optimizers import SGD
+from keras.layers import Dense
 from sklearn.preprocessing import Imputer
 
 
@@ -20,14 +18,9 @@ def main():
 
     model = Sequential()
 
-    model.add(Dense(128, input_dim=8))
-    model.add(Activation('relu'))
-
-    model.add(Dense(64))
-    model.add(Activation('relu'))
-
-    model.add(Dense(128, input_dim=8))
-    model.add(Activation('softmax'))
+    model.add(Dense(128, input_dim=8, activation='relu'))
+    model.add(Dense(64, activation='relu'))
+    model.add(Dense(128, activation='softmax'))
 
     model.compile(
         optimizer='adam',
