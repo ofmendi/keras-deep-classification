@@ -13,8 +13,8 @@ def main():
     imp = Imputer(missing_values=-99999, strategy="mean", axis=0)
     veriyeni = imp.fit_transform(veriyeni)
 
-    giris = veriyeni[:,0:8]
-    cikis = veriyeni[:,9]
+    giris = veriyeni[:, 0:8]
+    cikis = veriyeni[:, 9]
 
     model = Sequential()
 
@@ -25,10 +25,12 @@ def main():
     model.compile(
         optimizer='adam',
         loss='sparse_categorical_crossentropy',
-        metrics=['accuracy'])
+        metrics=['accuracy']
+    )
+    
     model.fit(giris, cikis, epochs=50, batch_size=32, validation_split=0.13)
 
-    tahmin = np.array([8,7,5,10,7,9,5,5]).reshape(1, 8)
+    tahmin = np.array([3,1,6,1,7,2,9,4]).reshape(1, 8)
     print(model.predict_classes(tahmin))
 
 
