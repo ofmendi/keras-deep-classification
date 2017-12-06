@@ -40,7 +40,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/omerfaruk/Dropbox/keras-deep-classification"
+VIRTUAL_ENV="/home/omerfaruk/Desktop/Folders/keras-deep-classification"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
