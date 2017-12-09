@@ -6,15 +6,15 @@ from sklearn.preprocessing import Imputer
 
 
 def main():
-    veri = pd.read_csv("breast-cancer-wisconsin.data")
-    veri.replace('?', -99999, inplace=True)
-    veriyeni = veri.drop(['1000025'], axis=1)
+    df = pd.read_csv("breast-cancer-wisconsin.data")
+    df.replace('?', -99999, inplace=True)
+    ndf = df.drop(['1000025'], axis=1)
 
     imp = Imputer(missing_values=-99999, strategy="mean", axis=0)
-    veriyeni = imp.fit_transform(veriyeni)
+    ndf = imp.fit_transform(ndf)
 
-    giris = veriyeni[:, 0:8]
-    cikis = veriyeni[:, 9]
+    inputs = ndf[:, 0:8]
+    output = ndf[:, 9]
 
     model = Sequential()
 
@@ -27,11 +27,11 @@ def main():
         loss='sparse_categorical_crossentropy',
         metrics=['accuracy']
     )
-    
-    model.fit(giris, cikis, epochs=50, batch_size=32, validation_split=0.13)
+ 
+    model.fit(inputs, output, epochs=50, batch_size=32, validation_split=0.13)
 
-    tahmin = np.array([3,1,6,1,7,2,9,4]).reshape(1, 8)
-    print(model.predict_classes(tahmin))
+    new_data = np.array([3,1,6,1,7,2,9,4]).reshape(1, 8)
+    print(model.predict_classes(new_data))
 
 
 if __name__ == '__main__':
